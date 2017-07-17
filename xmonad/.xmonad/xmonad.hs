@@ -34,7 +34,7 @@ main = do
     terminal = "urxvt"
     -- modMask    = mod4Mask -- Use the "Win" key for the mod key
     , manageHook = myManageHook <+> manageHook desktopConfig
-    , layoutHook = desktopLayoutModifiers $ myLayouts
+    -- , layoutHook = desktopLayoutModifiers $ myLayouts
     , logHook    = dynamicLogString def >>= xmonadPropLog
     }
 
@@ -62,7 +62,7 @@ myLayouts = toggleLayouts (noBorders Full) others
 -- great replacement for dmenu.
 
 myXPConfig = def
-  { position          = Bottom
+  { position          = Top
   , alwaysHighlight   = True
   , promptBorderWidth = 0
   , font              = "xft:monospace:size=12"

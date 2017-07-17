@@ -42,7 +42,7 @@
     gmrun
     haskellPackages.xmobar
     neovim
-    rxvt_unicode-with-plugins
+    rxvt_unicode
     stalonetray
     stow
     xclip
@@ -97,70 +97,45 @@
        enableContribAndExtras = true;
      };		       
 	
-    desktopManager = {
-      default = "none";
-#     xfce.enable = true;
-#     xterm.enable = false;
-    };
-      
+    desktopManager.default = "none";
+    
+
     displayManager.slim.enable = true;
     displayManager.slim.defaultUser = "brooke";
     displayManager.sessionCommands =  ''
        xrdb "${pkgs.writeText  "xrdb.conf" ''
           URxvt.font:                 xft:Dejavu Sans Mono for Powerline:size=12
-          XTerm*faceName:             xft:Dejavu Sans Mono for Powerline:size=12
-          XTerm*utf8:                 2
           URxvt.iconFile:             /usr/share/icons/elementary/apps/24/terminal.svg
           URxvt.letterSpace:          0
 
           URxvt.background:           #121214
           URxvt.foreground:           #FFFFFF
-          XTerm*background:           #121212
-          XTerm*foreground:           #FFFFFF
           ! black
           URxvt.color0  :             #2E3436
           URxvt.color8  :             #555753
-          XTerm*color0  :             #2E3436
-          XTerm*color8  :             #555753
           ! red
           URxvt.color1  :             #CC0000
           URxvt.color9  :             #EF2929
-          XTerm*color1  :             #CC0000
-          XTerm*color9  :             #EF2929
           ! green
           URxvt.color2  :             #4E9A06
           URxvt.color10 :             #8AE234
-          XTerm*color2  :             #4E9A06
-          XTerm*color10 :             #8AE234
           ! yellow
           URxvt.color3  :             #C4A000
           URxvt.color11 :             #FCE94F
-          XTerm*color3  :             #C4A000
-          XTerm*color11 :             #FCE94F
           ! blue
           URxvt.color4  :             #3465A4
           URxvt.color12 :             #729FCF
-          XTerm*color4  :             #3465A4
-          XTerm*color12 :             #729FCF
           ! magenta
           URxvt.color5  :             #75507B
           URxvt.color13 :             #AD7FA8
-          XTerm*color5  :             #75507B
-          XTerm*color13 :             #AD7FA8
           ! cyan
           URxvt.color6  :             #06989A
           URxvt.color14 :             #34E2E2
-          XTerm*color6  :             #06989A
-          XTerm*color14 :             #34E2E2
           ! white
           URxvt.color7  :             #D3D7CF
           URxvt.color15 :             #EEEEEC
-          XTerm*color7  :             #D3D7CF
-          XTerm*color15 :             #EEEEEC
-
 
           URxvt*saveLines:            32767
-          XTerm*saveLines:            32767
 
           URxvt.colorUL:              #AED210
           URxvt.perl-ext:             default,url-select
@@ -184,6 +159,7 @@
           Xft.hintstyle:  hintfull
           Xft.hinting: 1
           Xft.antialias: 1 
+      
        ''}"
     '';
   };
