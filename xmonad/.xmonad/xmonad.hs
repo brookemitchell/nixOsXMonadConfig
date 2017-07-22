@@ -21,20 +21,32 @@ import XMonad.Prompt.ConfirmPrompt
 import XMonad.Prompt.Shell
 import XMonad.Util.EZConfig
 
+import XMonad.Hooks.EwmhDesktops        (ewmh)
+import XMonad.Hooks.ManageDocks
+import System.Taffybar.Hooks.PagerHints (pagerHints)
+
 --------------------------------------------------------------------------------
 
+myFocusedBorderColor = "#5294EA"
+myStartupHook = do
+        spawn "nitrogen --restore&"
+        spawn "xsetroot -cursor_name left_ptr &"
+        spawn "xrdb -merge ~/.XResources"
+        spawn "taffybar"
+
 main = do
-  spawn "xmobar" -- Start a task bar such as xmobar.
-  -- Start xmonad using the main desktop configuration with a few
-  -- simple overrides:
-
-  xmonad $ desktopConfig
-
+  xmonad
+    $ ewmh
+    $ pagerHints
+    $ desktopConfig
     {
     terminal = "urxvt"
     -- modMask    = mod4Mask -- Use the "Win" key for the mod key
-    , manageHook = myManageHook <+> manageHook desktopConfig
+    -- , manageHook = myManageHook <+> manageHook desktopConfig
+    , focusedBorderColor = myFocusedBorderColor
+    , manageHook = manageDocks
     -- , layoutHook = desktopLayoutModifiers $ myLayouts
+    , startupHook = myStartupHook
     , logHook    = dynamicLogString def >>= xmonadPropLog
     }
 

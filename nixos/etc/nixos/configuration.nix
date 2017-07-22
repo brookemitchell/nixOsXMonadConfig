@@ -40,13 +40,27 @@
     firefox
     git    
     gmrun
-    haskellPackages.xmobar
+    nitrogen
+    vim
+    haskellPackages.taffybar
     neovim
     rxvt_unicode
-    stalonetray
     stow
     xclip
     xscreensaver
+
+    # system utils
+    lsof 
+    xorg.xev
+    acpi
+    pciutils
+    usbutils   
+    powertop
+    htop
+    wget   
+    tree
+    ag
+    upower
   ];
 
   nixpkgs.config = {
@@ -87,6 +101,7 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
+  services.upower.enable = true;
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
@@ -95,6 +110,12 @@
      windowManager.xmonad = {
        enable = true;
        enableContribAndExtras = true;
+       extraPackages = hpkgs: [
+	 hpkgs.MissingH
+	 hpkgs.taffybar
+	 hpkgs.xmonad-contrib
+	 hpkgs.xmonad-extras
+       ];
      };		       
 	
     desktopManager.default = "none";
@@ -178,6 +199,14 @@
   boot.initrd.checkJournalingFS = false;
   virtualisation.virtualbox.guest.enable = true;
 
+  fileSystems."/virtualboxshare" = {
+    fsType = "vboxsf";
+    device = "virtualboxshare";
+    options = [ "rw" ];
+  };
+  services.emacs.enable = true;
+  # services.emacs.package = import /home/brooke/.emacs.d { pkgs = pkgs; };
+  services.emacs.defaultEditor = true;
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.03";
   system.autoUpgrade.enable = true;
