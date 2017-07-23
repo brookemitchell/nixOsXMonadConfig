@@ -37,13 +37,16 @@
   programs.bash.enableCompletion = true;
   environment.systemPackages = with pkgs; [
     emacs
+    mitscheme
     firefox
     git    
     gmrun
     nitrogen
+    aspell
     vim
     haskellPackages.taffybar
     neovim
+    nodejs
     rxvt_unicode
     stow
     xclip
