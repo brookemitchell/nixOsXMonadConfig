@@ -45,14 +45,26 @@
     aspell
     vim
     haskellPackages.taffybar
+    haskellPackages.xmobar
     neovim
     nodejs
     rxvt_unicode
     stow
     xclip
     xscreensaver
+    python
+    jq
+    electron
 
     # system utils
+    xorg.libxkbfile
+    xorg.libXtst
+    xorg.libXext
+    automake
+    libtool
+    gnum4
+    gcc
+    gnumake
     lsof 
     xorg.xev
     acpi
