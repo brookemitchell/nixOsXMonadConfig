@@ -57,7 +57,6 @@
     xscreensaver
     python
     jq
-    electron
 
     # system utils
     xorg.libxkbfile
@@ -81,6 +80,9 @@
     ag
     upower
   ];
+
+  nix.gc.automatic = true;
+  nix.gc.dates = "03:15";
 
   nixpkgs.config = {
     allowUnfree = true;
