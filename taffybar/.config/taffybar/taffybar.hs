@@ -1,58 +1,47 @@
 import System.Taffybar
+
+import System.Taffybar.Battery
 import System.Taffybar.Systray
 import System.Taffybar.TaffyPager
-import System.Taffybar.Battery
 import System.Taffybar.SimpleClock
-import System.Taffybar.DiskIOMonitor
-import System.Taffybar.Widgets.PollingGraph
-import System.Taffybar.Widgets.PollingBar
-import System.Information.CPU
-import System.Information.Memory
-import System.Information.Battery
 import System.Taffybar.FreedesktopNotifications
-import System.Taffybar.MPRIS2
+import System.Taffybar.Weather
+import System.Taffybar.MPRIS
+
+import System.Taffybar.Widgets.PollingBar
+import System.Taffybar.Widgets.PollingGraph
+
+import System.Information.Memory
+import System.Information.CPU
+
+
+memCallback = do
+  mi <- parseMeminfo
+  return [memoryUsedRatio mi]
+
+cpuCallback = do
+  (userLoad, systemLoad, totalLoad) <- cpuLoad
+  return [totalLoad, systemLoad]
 
 main = do
-    let mem = pollingGraphNew memCfg 1 memCallback
-            where
-                memCallback = do
-                    mi <- parseMeminfo
-                    return [memoryUsedRatio mi]
-                memCfg = defaultGraphConfig
-                    { graphDataColors = [(1, 0, 0, 1)]
-                    , graphLabel = Nothing
-                    , graphDirection = RIGHT_TO_LEFT
-                    }
+  let memCfg = defaultGraphConfig { graphDataColors = [(1, 0, 0, 1)]
+                                  , graphLabel = Just "mem"
+                                  }
+      cpuCfg = defaultGraphConfig { graphDataColors = [ (0, 1, 0, 1)
+                                                      , (1, 0, 1, 0.5)
+                                                      ]
+                                  , graphLabel = Just "cpu"
+                                  }
 
-        cpu = pollingGraphNew cpuCfg 1 cpuCallback
-            where
-                cpuCallback = do
-                    (_, _, totalLoad) <- cpuLoad
-                    return [totalLoad]
-                cpuCfg = defaultGraphConfig
-                    { graphDataColors = [(0, 1, 0, 1)]
-                    , graphLabel = Nothing
-                    , graphDirection = RIGHT_TO_LEFT
-                    }
-
-        disk = dioMonitorNew dskCfg 1 "sda"
-           where
-               dskCfg = defaultGraphConfig 
-                   { graphDataColors = [(0.5, 0.63, 0.74, 1)]
-                    , graphLabel = Nothing
-                    , graphDirection = RIGHT_TO_LEFT
-                   }
-
-
-        note = notifyAreaNew defaultNotificationConfig
-        mpris = mpris2New
-        clock = textClockNew Nothing "<span fgcolor='#81a2be'>%a %b %_d %H:%M</span>" 1
-        log = taffyPagerNew defaultPagerConfig
-        tray = systrayNew
-        battery = textBatteryNew "$percentage$%/$time$" 60
-
-    defaultTaffybar defaultTaffybarConfig { 
-        barHeight = 20
-        , startWidgets = [ log, note ]
-        , endWidgets = [mpris, tray, battery, clock, disk, mem, cpu ]
-        }
+  let clock = textClockNew Nothing "<span fgcolor='orange'>%a %b %_d %H:%M</span>" 1
+      pager = taffyPagerNew defaultPagerConfig
+      note = notifyAreaNew defaultNotificationConfig
+      wea = weatherNew (defaultWeatherConfig "NZAA") 10
+      mpris = mprisNew defaultMPRISConfig
+      mem = pollingGraphNew memCfg 1 memCallback
+      cpu = pollingGraphNew cpuCfg 0.5 cpuCallback
+      batt = batteryBarNew defaultBatteryConfig 5.0
+      tray = systrayNew
+  defaultTaffybar defaultTaffybarConfig { startWidgets = [ pager, note ]
+                                        , endWidgets = [ tray, wea, batt, clock, mem, cpu, mpris ]
+                                        }

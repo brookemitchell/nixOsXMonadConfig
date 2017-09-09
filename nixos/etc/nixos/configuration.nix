@@ -36,18 +36,21 @@
   # $ nix-env -qaP | grep wget
   programs.bash.enableCompletion = true;
   environment.systemPackages = with pkgs; [
+    nodejs-8_x
+    stack
+    atom
     emacs
     mitscheme
     firefox
+    chromium
     git    
     gmrun
     nitrogen
     aspell
     vim
-    haskellPackages.taffybar
     haskellPackages.xmobar
+    haskellPackages.taffybar
     neovim
-    nodejs
     rxvt_unicode
     stow
     xclip
@@ -60,13 +63,14 @@
     xorg.libxkbfile
     xorg.libXtst
     xorg.libXext
+    xorg.xev
+    x11
     automake
     libtool
     gnum4
     gcc
     gnumake
     lsof 
-    xorg.xev
     acpi
     pciutils
     usbutils   
@@ -105,13 +109,13 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
