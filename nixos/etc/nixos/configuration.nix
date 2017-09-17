@@ -36,7 +36,11 @@
   # $ nix-env -qaP | grep wget
   programs.bash.enableCompletion = true;
   environment.systemPackages = with pkgs; [
+    fasd
+    purescript
     nodejs-8_x
+    nodePackages.node2nix
+    nodePackages.bower
     stack
     atom
     emacs
