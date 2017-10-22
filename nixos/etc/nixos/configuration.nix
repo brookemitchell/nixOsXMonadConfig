@@ -36,16 +36,24 @@
   # $ nix-env -qaP | grep wget
   programs.bash.enableCompletion = true;
   environment.systemPackages = with pkgs; [
-    fasd
-    purescript
-    nodejs-8_x
+    # purescript
+    # > nix-env -i nodejs
+    # > nix-env -iA nixos.pkgs.haskellPackages.purescript
+    # nix-env -i bin-grunt-cli
+    # nix-env -i bin-gulp
+    # nix-env -i bin-bower
+    # atom
+    # firefox
+    haskellPackages.purescript
     nodePackages.node2nix
     nodePackages.bower
+    nodePackages.gulp
+    nodePackages.grunt-cli
+    fasd
+    nodejs-8_x
     stack
-    atom
     emacs
     mitscheme
-    firefox
     chromium
     git    
     gmrun
@@ -63,16 +71,16 @@
     jq
 
     # system utils
-    xorg.libxkbfile
-    xorg.libXtst
-    xorg.libXext
-    xorg.xev
-    x11
-    automake
-    libtool
-    gnum4
-    gcc
-    gnumake
+    # xorg.libxkbfile
+    # xorg.libXtst
+    # xorg.libXext
+    # xorg.xev
+    # x11
+    # automake
+    # libtool
+    # gnum4
+    # gcc
+    # gnumake
     lsof 
     acpi
     pciutils
@@ -103,6 +111,7 @@
       freefont_ttf
       google-fonts
       inconsolata
+      hasklig
       liberation_ttf
       powerline-fonts
       source-code-pro

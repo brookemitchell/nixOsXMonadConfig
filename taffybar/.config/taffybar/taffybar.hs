@@ -24,7 +24,7 @@ cpuCallback = do
   return [totalLoad, systemLoad]
 
 main = do
-  let memCfg = defaultGraphConfig { graphDataColors = [(1, 0, 0, 1)]
+  let memCfg = defaultGraphConfig { graphDataColors = [(0, 0, 1, 1)]
                                   , graphLabel = Just "mem"
                                   }
       cpuCfg = defaultGraphConfig { graphDataColors = [ (0, 1, 0, 1)
