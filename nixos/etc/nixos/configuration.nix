@@ -36,15 +36,13 @@
   # $ nix-env -qaP | grep wget
   programs.bash.enableCompletion = true;
   environment.systemPackages = with pkgs; [
-    # purescript
-    # > nix-env -i nodejs
-    # > nix-env -iA nixos.pkgs.haskellPackages.purescript
+    purescript
     # nix-env -i bin-grunt-cli
     # nix-env -i bin-gulp
     # nix-env -i bin-bower
-    # atom
-    # firefox
-    haskellPackages.purescript
+    atom
+    firefox
+    # haskellPackages.purescript
     nodePackages.node2nix
     nodePackages.bower
     nodePackages.gulp
@@ -55,7 +53,7 @@
     emacs
     mitscheme
     chromium
-    git    
+    git
     gmrun
     nitrogen
     aspell
@@ -69,25 +67,27 @@
     xscreensaver
     python
     jq
+    electron
 
     # system utils
-    # xorg.libxkbfile
-    # xorg.libXtst
-    # xorg.libXext
-    # xorg.xev
-    # x11
-    # automake
-    # libtool
-    # gnum4
-    # gcc
-    # gnumake
-    lsof 
+    xorg.libxkbfile
+    xorg.libXtst
+    xorg.libXext
+    xorg.xev
+    x11
+    automake
+    libtool
+    gnum4
+    gcc
+    gnumake
+
+    lsof
     acpi
     pciutils
-    usbutils   
+    usbutils
     powertop
     htop
-    wget   
+    wget
     tree
     ag
     upower
@@ -98,8 +98,8 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-  }; 
- 
+  };
+
   fonts = {
     enableFontDir = true;
     enableGhostscriptFonts = true;
@@ -120,7 +120,7 @@
       ubuntu_font_family
     ];
   };
-  
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -140,7 +140,7 @@
     # Enable the X11 windowing system.
     enable = true;
     layout = "us";
-        
+
      windowManager.xmonad = {
        enable = true;
        enableContribAndExtras = true;
@@ -150,10 +150,10 @@
 	 hpkgs.xmonad-contrib
 	 hpkgs.xmonad-extras
        ];
-     };		       
-	
+     };
+
     desktopManager.default = "none";
-    
+
 
     displayManager.slim.enable = true;
     displayManager.slim.defaultUser = "brooke";
@@ -213,8 +213,8 @@
           Xft.lcdfilter:  lcddefault
           Xft.hintstyle:  hintfull
           Xft.hinting: 1
-          Xft.antialias: 1 
-      
+          Xft.antialias: 1
+
        ''}"
     '';
   };
